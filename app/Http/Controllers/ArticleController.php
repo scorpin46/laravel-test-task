@@ -18,20 +18,7 @@ class ArticleController extends Controller
      */
     public function index(int $rubricId = null)
     {
-        $articlesBuilder = Article::query();
-        $searchQuery     = request('searchQuery');
-
-        if ($rubricId) {
-            $articlesBuilder->ofRubric($rubricId);
-        }
-
-        if (trim($searchQuery)) {
-            $articlesBuilder->whereFullText(['name', 'text'], $searchQuery);
-        } else {
-            $articlesBuilder->orderByDesc('published_at');
-        }
-
-        $articles = $articlesBuilder->paginate(5);
+        $articles = ArticleService::searchByQuery(request('searchQuery'), $rubricId);
         $view     = request()->ajax()
             ? 'articles._parts.list'
             : 'articles.index';
@@ -41,6 +28,13 @@ class ArticleController extends Controller
         ]);
     }
 
+    /**
+     * Rubric page with articles
+     *
+     * @param string $rubric
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+     */
     public function rubric(string $rubric)
     {
         $rubric = Rubric::query()->where('slug', $rubric)->firstOrFail();

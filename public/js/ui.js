@@ -16,7 +16,6 @@
         initSearchInput: () => {
             $('#search-input').on('input', function(){
                 let query = this.value.trim();
-                // const $datalist = $('#' + this.getAttribute('list'));
 
                 if (window.searchXhr){
                     window.searchXhr.abort();
@@ -29,6 +28,11 @@
                         searchQuery: query,
                         _token: window.csrf,
                     },
+                    error: function(response, errorType){
+                        if (errorType !== 'abort'){
+                            $('.articles__list').html('Ошибка запроса...');
+                        }
+                    }
                 }).done(function (data) {
                     $('.articles__list').hide().html(data).fadeIn(200);
                 })

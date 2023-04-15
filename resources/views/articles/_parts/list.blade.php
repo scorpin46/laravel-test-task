@@ -36,5 +36,5 @@
     </article>
 @endforeach
 @if( ! $articles->count() )
-    Привязок не найдено...
+    Данных не найдено...
 @endempty

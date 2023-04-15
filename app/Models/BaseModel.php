@@ -797,4 +797,12 @@ abstract class BaseModel extends Model
 
         return $this;
     }
+
+    /**
+     * @return array
+     */
+    public function getAttributesKeys(): array
+    {
+        return array_keys($this->getAttributes());
+    }
 }

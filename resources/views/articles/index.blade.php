@@ -4,7 +4,12 @@
     <div class="container">
         <div class="menu__search-form">
             <input type="text" id="search-input" placeholder="Поиск"  required="" list="search-suggestions" class="form-control full-width m-b-20 m-t-20">
-            <datalist id="search-suggestions"></datalist>
+            <small>
+                <div>по умолчанию слова ищутся через OR</div>
+                <div>"+" перед словом означает AND</div>
+                <div>"-" перед словом означает NOT</div>
+                <div>"*" после слова означает поиск продолжения</div>
+            </small>
         </div>
 
         <main class="articles" role="main">
