@@ -60,6 +60,7 @@
                             method: 'POST',
                             data: {
                                 page: page,
+                                searchQuery: $('#search-input').val().trim(),
                                 _token: window.csrf,
                             },
                             beforeSend: function () {
